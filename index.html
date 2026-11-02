@@ -1,0 +1,29 @@
+---
+layout: default
+---
+{% assign fichas = site.fichas | sort: "orden" %}
+<header class="portada">
+  <p class="kicker">{{ site.materia }} · {{ site.periodo }}</p>
+  <h1 class="tiza">Fichas de algoritmos</h1>
+  <p class="intro">Una ficha por cada algoritmo visto en el periodo: para qué sirve, sus límites, cómo funciona, su implementación en pseudocódigo, C++ y Python, y mis reflexiones.</p>
+</header>
+
+{% assign escuelas = "Programación dinámica|Algoritmos voraces" | split: "|" %}
+{% for esc in escuelas %}
+<section class="grupo">
+  <h2 class="tiza tiza-sub">{{ esc }}</h2>
+  <ul class="fichas">
+    {% for f in fichas %}{% if f.escuela == esc %}
+    <li>
+      <a class="ficha" href="{{ f.url | relative_url }}">
+        <span class="ficha-nombre">{{ f.nombre_corto }}</span>
+        <span class="campo"><span class="etiqueta">Tiempo</span> <span class="valor">{{ f.tiempo | split: ";" | first }}</span></span>
+        <span class="campo"><span class="etiqueta">Espacio</span> <span class="valor">{{ f.espacio }}</span></span>
+        <span class="campo"><span class="etiqueta">Creador</span> <span class="valor">{{ f.creador | split: " (" | first }}</span></span>
+        <span class="nota">{{ f.fecha }}</span>
+      </a>
+    </li>
+    {% endif %}{% endfor %}
+  </ul>
+</section>
+{% endfor %}

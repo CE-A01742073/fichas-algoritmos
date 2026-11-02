@@ -1,0 +1,31 @@
+---
+layout: default
+---
+{% assign fichas = site.fichas | sort: "orden" %}
+{% for f in fichas %}{% if f.url == page.url %}{% assign i = forloop.index0 %}{% endif %}{% endfor %}
+{% assign anterior = i | minus: 1 %}
+{% assign siguiente = i | plus: 1 %}
+
+<a class="volver" href="{{ '/' | relative_url }}">Todas las fichas</a>
+
+<header class="ficha ficha-grande">
+  <h1 class="ficha-nombre">{{ page.nombre }}</h1>
+  <p class="campo"><span class="etiqueta">Creador</span> <span class="valor">{{ page.creador }}</span></p>
+  <p class="campo"><span class="etiqueta">Fecha</span> <span class="valor">{{ page.fecha }}</span></p>
+  <p class="campo"><span class="etiqueta">Escuela de pensamiento</span> <span class="valor">{{ page.escuela }}</span></p>
+  <p class="campo"><span class="etiqueta">Tiempo</span> <span class="valor">{{ page.tiempo }}</span></p>
+  <p class="campo"><span class="etiqueta">Espacio</span> <span class="valor">{{ page.espacio }}</span></p>
+</header>
+
+<article class="hoja">
+{{ content }}
+</article>
+
+<nav class="vecinos">
+  {% if anterior >= 0 %}{% assign a = fichas[anterior] %}
+  <a class="vecino" href="{{ a.url | relative_url }}"><span class="etiqueta">Anterior</span> {{ a.nombre_corto }}</a>
+  {% else %}<span></span>{% endif %}
+  {% if siguiente < fichas.size %}{% assign s = fichas[siguiente] %}
+  <a class="vecino vecino-der" href="{{ s.url | relative_url }}"><span class="etiqueta">Siguiente</span> {{ s.nombre_corto }}</a>
+  {% endif %}
+</nav>

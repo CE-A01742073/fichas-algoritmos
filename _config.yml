@@ -1,0 +1,32 @@
+title: Fichas de algoritmos
+description: Fichas técnicas y reflexiones de los algoritmos del segundo periodo de Análisis y Diseño de Algoritmos Avanzados.
+autor: Christopher Evans
+materia: Análisis y Diseño de Algoritmos Avanzados
+periodo: Segundo periodo
+lang: es
+
+
+baseurl: "/fichas-algoritmos"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+
+collections:
+  fichas:
+    output: true
+    permalink: /:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: fichas
+    values:
+      layout: ficha
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
